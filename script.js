@@ -65,6 +65,21 @@ function getMealById(mealID) {
 		})
 }
 
+//  #13 Fetch random meal from API
+function getRandomMeal() {
+	// Clear meals and heading
+	mealsEl.innerHTML = ''
+	resultHeading.innerHTML = ''
+
+	fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
+		.then(res => res.json())
+		.then(data => {
+			const meal = data.meals[0]
+
+			addMealToDOM(meal)
+		})
+}
+
 //  #11 Add Meal to DOM
 // Add meal to DOM
 function addMealToDOM(meal) {
@@ -102,6 +117,9 @@ function addMealToDOM(meal) {
 // EVENT LISTENERS
 // #2 Submit Event Listener
 submit.addEventListener('submit', searchMeal)
+
+//  #12 Get random Event Listener
+random.addEventListener('click', getRandomMeal)
 
 //  #9 Event Listener for each result
 mealsEl.addEventListener('click', e => {
